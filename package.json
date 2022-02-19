@@ -1,6 +1,6 @@
 {
-  "name": "electron-template",
-  "productName": "electron-template",
+  "name": "electron-react-template",
+  "productName": "electron-react-template",
   "version": "1.0.0",
   "description": "electron template",
   "main": "dist/js/main.js",
