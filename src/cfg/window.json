@@ -1,0 +1,12 @@
+{
+  "opt": {
+    "width": 800,
+    "height": 600,
+    "backgroundColor": "#ffffff"
+  },
+  "customize": {
+    "title": "electron-template",
+    "headNative": true,
+    "route": "/home"
+  }
+}
