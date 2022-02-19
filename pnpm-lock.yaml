@@ -16,6 +16,7 @@ specifiers:
   sass: ^1.49.8
   sass-loader: ^12.6.0
   socket.io-client: ^4.4.1
+  style-loader: ^3.3.1
   swc-loader: ^0.1.15
   typescript: ^4.5.5
   webpack: ^5.69.1
@@ -39,6 +40,7 @@ devDependencies:
   react-dom: 17.0.2_react@17.0.2
   sass: 1.49.8
   sass-loader: 12.6.0_sass@1.49.8+webpack@5.69.1
+  style-loader: 3.3.1_webpack@5.69.1
   swc-loader: 0.1.15_@swc+core@1.2.142+webpack@5.69.1
   typescript: 4.5.5
   webpack: 5.69.1_@swc+core@1.2.142
@@ -4401,6 +4403,15 @@ packages:
   /strip-json-comments/2.0.1:
     resolution: {integrity: sha512-4gB8na07fecVVkOI6Rs4e7T6NOTki5EmL7TUduTs6bu3EdnSycntVJ4re8kgZA+wx9IueI2Y11bfbgwtzuE0KQ==}
     engines: {node: '>=0.10.0'}
+    dev: true
+
+  /style-loader/3.3.1_webpack@5.69.1:
+    resolution: {integrity: sha512-GPcQ+LDJbrcxHORTRes6Jy2sfvK2kS6hpSfI/fXhPt+spVzxF6LJ1dHLN9zIGmVaaP044YKaIatFaufENRiDoQ==}
+    engines: {node: '>= 12.13.0'}
+    peerDependencies:
+      webpack: ^5.0.0
+    dependencies:
+      webpack: 5.69.1_@swc+core@1.2.142
     dev: true
 
   /sumchecker/3.0.1:
