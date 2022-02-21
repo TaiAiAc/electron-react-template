@@ -5,7 +5,7 @@
     "backgroundColor": "#ffffff"
   },
   "customize": {
-    "title": "electron-template",
+    "title": "electron-react-template",
     "headNative": true,
     "route": "/home"
   }

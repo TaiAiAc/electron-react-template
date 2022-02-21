@@ -1,7 +1,7 @@
 {
   "compression": "maximum",
-  "productName": "electron-template",
-  "appId": "org.electron-template",
+  "productName": "electron-react-template",
+  "appId": "org.electron-react-template",
   "copyright": "MIT",
   "asar": true,
   "directories": {
@@ -35,7 +35,7 @@
     "uninstallerSidebar": "resources/build/icons/modern-wizard.bmp",
     "createDesktopShortcut": true,
     "createStartMenuShortcut": true,
-    "shortcutName": "electron-template",
+    "shortcutName": "electron-react-template",
     "include": "resources/build/cfg/installer.nsh",
     "menuCategory": false,
     "displayLanguageSelector": false
@@ -73,7 +73,7 @@
   "linux": {
     "icon": "resources/build/icons",
     "target": "AppImage",
-    "executableName": "electron-template"
+    "executableName": "electron-react-template"
   },
   "npmRebuild": true,
   "publish": [

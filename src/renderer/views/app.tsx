@@ -1,10 +1,7 @@
-import React from 'react';
 import { windowCreate, windowShow } from '@/renderer/common/window';
 import { getCustomize } from '@/renderer/store';
-import '@/renderer/views/style/color.scss';
-import '@/renderer/views/style/index.scss';
 
-export default function App() {
+export default function () {
   const args = getCustomize();
   windowShow();
 
