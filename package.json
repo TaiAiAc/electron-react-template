@@ -3,7 +3,7 @@
   "productName": "electron-react-template",
   "version": "1.0.0",
   "description": "electron template",
-  "main": "dist/js/main.js",
+  "main": "dist/main/index.js",
   "author": {
     "name": "youliso",
     "email": "youliso@Hotmail.com"
