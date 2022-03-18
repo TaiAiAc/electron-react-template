@@ -11,7 +11,7 @@ export interface RequestOpt extends RequestInit {
 
 export interface TimeOutAbort {
   signal: AbortSignal;
-  id: NodeJS.Timeout;
+  id: number;
 }
 
 /**
