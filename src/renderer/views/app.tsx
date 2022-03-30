@@ -18,6 +18,7 @@ export default function () {
 
   return (
     <div className="info">
+      <div>hello react</div>
       <button className="but" onClick={() => baidu()}>
         百度
       </button>
