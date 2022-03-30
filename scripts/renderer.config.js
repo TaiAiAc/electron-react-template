@@ -21,5 +21,5 @@ module.exports = defineConfig({
       '@': resolve('src')
     }
   },
-  plugins: [react()]
+  plugins: [react(), macrosPlugin()]
 });
