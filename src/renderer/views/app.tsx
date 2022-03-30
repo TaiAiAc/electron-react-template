@@ -1,15 +1,13 @@
 import { windowCreate, windowShow } from '@/renderer/common/window';
-import { getCustomize } from '@/renderer/store';
 
 export default function () {
-  const args = getCustomize();
   windowShow();
 
   function baidu() {
     windowCreate(
       {
         url: 'https://baidu.com/',
-        parentId: args.id
+        parentId: window.customize.id
       },
       {
         width: 1280,

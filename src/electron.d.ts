@@ -29,10 +29,16 @@ interface Customize {
   data?: any;
 }
 
+interface Window {
+  customize: Customize;
+}
+
 interface AppInfo {
   name: string;
   version: string;
 }
+
+type AppPathKey = 'home' | 'appData' | 'userData' | 'cache' | 'temp' | 'exe' | 'module' | 'desktop' | 'documents' | 'downloads' | 'music' | 'pictures' | 'videos' | 'recent' | 'logs' | 'crashDumps'
 
 declare namespace Electron {
   interface BrowserWindow {

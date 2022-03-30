@@ -4,10 +4,6 @@
   "version": "1.0.0",
   "description": "electron template",
   "main": "dist/main/index.js",
-  "author": {
-    "name": "youliso",
-    "email": "youliso@Hotmail.com"
-  },
   "license": "MIT",
   "scripts": {
     "dev": "node scripts/cfg.js && node scripts/dev.js",
@@ -26,14 +22,15 @@
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
     "@vitejs/plugin-react": "^1.2.0",
-    "electron": "^17.0.1",
+    "asarmor": "^2.0.0",
+    "electron": "^18.0.0",
     "electron-builder": "^22.14.13",
     "electron-rebuild": "^3.2.7",
     "esbuild": "^0.14.23",
     "javascript-obfuscator": "^4.0.0",
     "prettier": "^2.5.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "rollup": "^2.67.3",
     "rollup-plugin-esbuild": "^4.8.2",
     "rollup-plugin-obfuscator": "^0.2.1",
@@ -41,7 +38,6 @@
     "vite": "^2.8.4"
   },
   "dependencies": {
-    "electron-updater": "^4.6.5",
-    "socket.io-client": "^4.4.1"
+    "electron-updater": "^4.6.5"
   }
 }

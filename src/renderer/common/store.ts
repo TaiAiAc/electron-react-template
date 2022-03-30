@@ -1,78 +1,64 @@
-type Obj<Value> = {} & {
-  [key: string]: Value | Obj<Value>;
+export type State<T> = {
+  [K in keyof T]: T[K];
 };
 
-class Store {
-  private static instance: Store;
+export type SimpleActionHandler<T> = (data?: any) => Partial<State<T>> | void | Promise<State<T>>;
 
-  public indexData: { [key: string]: any } = {};
+export type ComplexActionHandler<T> = (
+  data?: any
+) => (state: State<T>, actions: MappedActions<T>) => Partial<State<T>> | void | Promise<State<T>>;
 
-  public proxyData: { [key: string]: { proxy: any; revoke: () => void } } = {};
+export type Actions<T> = {
+  [key: string]: SimpleActionHandler<T> | ComplexActionHandler<T>;
+};
 
-  static getInstance() {
-    if (!Store.instance) Store.instance = new Store();
-    return Store.instance;
+export type MappedActions<T> = {
+  [key: string]: (data?: any) => Partial<State<T>> | void | Promise<T>;
+};
+
+export type SubscriptionFn<T> = (state: State<T>, triggerAction?: keyof MappedActions<T>) => void;
+
+export type Store<T> = {
+  getState: () => State<T>;
+  actions: MappedActions<T>;
+  subscribe: (listener: SubscriptionFn<T>) => void;
+};
+
+export function createStore<T>(actions: Actions<T>, state: T): Store<T> {
+  const subscriptions: SubscriptionFn<T>[] = [];
+  const mappedActions: MappedActions<T> = {};
+  let globalState = { ...state };
+
+  for (let [key, fn] of Object.entries(actions)) {
+    ((name, action) => {
+      mappedActions[name] = (data) => {
+        let newState = action(data);
+
+        if (typeof newState === 'function') {
+          newState = newState(globalState, mappedActions);
+        }
+
+        if (newState && !(newState instanceof Promise)) {
+          globalState = {
+            ...globalState,
+            ...newState
+          };
+
+          subscriptions.forEach((subscription) => {
+            subscription(globalState, name);
+          });
+        }
+      };
+    })(key, fn);
   }
 
-  constructor() {}
-
-  get<Value>(key: string): Value | undefined {
-    if (key === '') {
-      console.error('Invalid key, the key can not be a empty string');
-      return;
+  const store: Store<T> = {
+    actions: mappedActions,
+    getState: () => globalState,
+    subscribe: (listener) => {
+      subscriptions.push(listener);
     }
+  };
 
-    if (!key.includes('.') && Object.prototype.hasOwnProperty.call(this.indexData, key)) {
-      return this.indexData[key] as Value;
-    }
-
-    const levels = key.split('.');
-    let cur = this.indexData;
-    for (const level of levels) {
-      if (Object.prototype.hasOwnProperty.call(cur, level)) {
-        cur = cur[level] as unknown as Obj<Value>;
-      } else {
-        return;
-      }
-    }
-    return cur as unknown as Value;
-  }
-
-  set<Value>(key: string, value: Value, exists: boolean = false): void {
-    if (key === '') {
-      console.error('Invalid key, the key can not be a empty string');
-      return;
-    }
-
-    if (!key.includes('.')) {
-      if (Object.prototype.hasOwnProperty.call(this.indexData, key) && exists) {
-        console.log(`The key ${key} looks like already exists on obj.`);
-      }
-      this.indexData[key] = value;
-    }
-
-    const levels = key.split('.');
-    const lastKey = levels.pop()!;
-
-    let cur = this.indexData;
-    for (const level of levels) {
-      if (Object.prototype.hasOwnProperty.call(cur, level)) {
-        cur = cur[level];
-      } else {
-        console.error(`Cannot set value because the key ${key} is not exists on obj.`);
-        return;
-      }
-    }
-
-    if (typeof cur !== 'object') {
-      console.error(`Invalid key ${key} because the value of this key is not a object.`);
-      return;
-    }
-    if (Object.prototype.hasOwnProperty.call(cur, lastKey) && exists) {
-      console.log(`The key ${key} looks like already exists on obj.`);
-    }
-    cur[lastKey] = value;
-  }
+  return store;
 }
-
-export default Store.getInstance();

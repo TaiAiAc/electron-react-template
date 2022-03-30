@@ -1,14 +1,13 @@
 import { windowLoad } from '@/renderer/common/window';
-import { setCustomize } from '@/renderer/store';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import '@/renderer/views/style';
 
 windowLoad((_, args) => {
-  setCustomize(args);
-  document.title = args.title || '';
+  window.customize = args;
   document.body.setAttribute('platform', window.environment.platform);
   document.body.setAttribute('headNative', args.headNative + '');
-  import('@/renderer/views/app').then((app) =>
-    ReactDOM.render(app.default(), document.getElementById('root'))
-  );
+  import('@/renderer/views/app').then((app) => {
+    const root = createRoot(document.getElementById('root') as HTMLElement);
+    root.render(app.default());
+  });
 });
